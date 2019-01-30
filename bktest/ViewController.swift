@@ -12,9 +12,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 
     @IBOutlet weak var collectionView: UICollectionView!
     
-    let products: [Product] = [
-        Product(description: "prod1", image: ""),
-        Product(description: "prod2", image: "")
+    var products: [Product] = [
+//        Product(description: "prod1", image: ""),
+//        Product(description: "prod2", image: "")
     ]
     
     var prods: [String: Any] = [:]
@@ -50,6 +50,23 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                         let banners = castedJSON["banners"]
                         if let array = banners as? [Any] {
                             print(array)
+                            
+//                            let data = try? JSONSerialization.data(withJSONObject: array[0], options: [])
+//                            let product = try? JSONDecoder().decode(Product.self, from: data!)
+//                            print(product?.image)
+//                            self.products.append(product!)
+//                            print(self.products[0].image)
+                            
+                            for prod in array {
+                                let data = try? JSONSerialization.data(withJSONObject: prod, options: [])
+                                let product = try? JSONDecoder().decode(Product.self, from: data!)
+                                print("\(product?.image), \(product?.description)")
+                                self.products.append(product!)
+//                                print(self.products[0].image)
+                            }
+                            for el in self.products {
+                                print(el.image)
+                            }
                         }
                     }
 
